@@ -3,3 +3,6 @@ dist/
 .slidev/
 *.log
 .DS_Store
+
+# 私有 deck：独立 git 仓库，永不进本公开仓库
+decks/_private/

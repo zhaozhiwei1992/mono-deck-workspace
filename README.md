@@ -14,6 +14,7 @@ decks/
   _template/    新 deck 复制起点
   demo-base/    只用 theme-base 的验证 deck
   demo-tech/    base + tech 的验证 deck（含 deck 级变量覆盖）
+  _private/     私有 deck 容器（独立 git 仓库，主仓忽略，见下文）
 ```
 
 包名即引用名，不走 scope、不发布 npm，一律 `workspace:*` 软链。
@@ -64,6 +65,38 @@ pnpm --filter deck-my-deck export
 ```
 
 `decks/<name>/` 内可选目录（仅本 deck 生效）：`components/ layouts/ setup/ styles/ public/`。
+
+## 私有 deck（不进公开仓库）
+
+私有 / 客户 / 内部内容放 `decks/_private/`，它本身是一个**独立的 git 仓库**，已被根 `.gitignore` 忽略：
+
+```
+decks/
+  _template/           公开
+  demo-base/           公开
+  demo-tech/           公开
+  _private/            ← 独立 git 仓库（.git 在这一层），主仓忽略整个目录
+    client-a/          deck-client-a
+    internal-2026/     deck-internal-2026
+```
+
+新建一份私有 deck（公开仓里**零改动**）：
+
+```bash
+cp -r decks/_template decks/_private/client-a
+# 改 decks/_private/client-a/package.json 的 name 为 deck-client-a
+pnpm install
+pnpm --filter deck-client-a dev
+```
+
+版本控制走它自己的仓库：
+
+```bash
+cd decks/_private
+git add . && git commit -m "feat: 初始 client-a"
+git remote add origin git@github.com:<you>/deck-private.git   # 私有仓库
+git push -u origin main
+```
 
 ## 常用脚本
 

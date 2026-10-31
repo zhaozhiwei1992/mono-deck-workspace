@@ -1,3 +1,5 @@
 packages:
   - "packages/*"
   - "decks/*"
+  # 私有 deck（git 已忽略，目录不存在时为空匹配，不影响 install）
+  - "decks/_private/*"
