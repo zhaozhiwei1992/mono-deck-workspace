@@ -1,0 +1,27 @@
+{
+  "name": "slidev-theme-tech",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "技术场景层：代码 / 架构 / 对比 / 指标 / 演进 版式（以 addons 方式叠加在 slidev-theme-base 之上）",
+  "keywords": [
+    "slidev-theme",
+    "slidev"
+  ],
+  "files": [
+    "layouts",
+    "components",
+    "styles"
+  ],
+  "engines": {
+    "slidev": ">=53.0.0"
+  },
+  "dependencies": {
+    "slidev-theme-base": "workspace:*"
+  },
+  "scripts": {
+    "dev": "slidev example.md",
+    "build": "slidev build example.md",
+    "export": "slidev export example.md"
+  }
+}

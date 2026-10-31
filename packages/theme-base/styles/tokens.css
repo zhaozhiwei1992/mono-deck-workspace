@@ -1,0 +1,39 @@
+/*
+ * tokens.css — 品牌可换的唯一开关
+ * 规则：
+ *   1. 语义层 --deck-*：主题/品牌/deck 只允许改这一层。
+ *   2. 映射层 --slidev-*：把语义 token 接到 Slidev 官方变量名上（core 布局、代码块跟随）。
+ *   3. 视觉必需项不写进 package.json 的 slidev.defaults（作为 addon 时 meta 不被读取）。
+ */
+:root {
+  /* 语义层 */
+  --deck-color-primary: #1a3a6b;
+  --deck-color-primary-soft: rgba(26, 58, 107, 0.08);
+  --deck-color-accent: #e63946;
+  --deck-color-bg: #ffffff;
+  --deck-color-fg: #1f2937;
+  --deck-color-muted: #6b7280;
+  --deck-color-line: #e5e7eb;
+  --deck-color-surface: #f8fafc;
+
+  --deck-radius: 8px;
+  --deck-font-sans: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  --deck-font-mono: 'Fira Code', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --deck-footer-height: 2.25rem;
+
+  /* 映射层 */
+  --slidev-theme-primary: var(--deck-color-primary);
+  --slidev-code-font-family: var(--deck-font-mono);
+  --slidev-code-radius: var(--deck-radius);
+}
+
+html.dark {
+  --deck-color-bg: #0f1420;
+  --deck-color-fg: #e5e7eb;
+  --deck-color-muted: #9ca3af;
+  --deck-color-line: #2a3441;
+  --deck-color-surface: #161e2c;
+  --deck-color-primary: #6ea8fe;
+  --deck-color-primary-soft: rgba(110, 168, 254, 0.12);
+}

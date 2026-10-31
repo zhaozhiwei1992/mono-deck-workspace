@@ -1,0 +1,14 @@
+{
+  "name": "deck-demo-tech",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "slidev",
+    "build": "slidev build",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "slidev-theme-base": "workspace:*",
+    "slidev-theme-tech": "workspace:*"
+  }
+}

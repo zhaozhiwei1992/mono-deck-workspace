@@ -1,0 +1,29 @@
+{
+  "name": "slidev-theme-base",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "结构层主题：版式、排版、token（不含任何品牌/业务语义）",
+  "keywords": [
+    "slidev-theme",
+    "slidev"
+  ],
+  "files": [
+    "layouts",
+    "components",
+    "styles",
+    "layoutHelper.ts",
+    "slide-bottom.vue"
+  ],
+  "engines": {
+    "slidev": ">=53.0.0"
+  },
+  "slidev": {
+    "colorSchema": "light"
+  },
+  "scripts": {
+    "dev": "slidev example.md",
+    "build": "slidev build example.md",
+    "export": "slidev export example.md"
+  }
+}

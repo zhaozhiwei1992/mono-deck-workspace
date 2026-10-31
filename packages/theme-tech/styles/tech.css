@@ -1,0 +1,304 @@
+/*
+ * tech.css — 场景层差异样式
+ * 只写「技术场景与结构层不同」的部分；基础排版、页脚、token 全部来自 slidev-theme-base。
+ * 加载顺序：base(theme) → tech(addons)，因此这里可以直接覆盖 --deck-*。
+ */
+
+.slidev-layout.tech-code,
+.slidev-layout.tech-arch,
+.slidev-layout.tech-compare,
+.slidev-layout.tech-benchmark,
+.slidev-layout.tech-timeline {
+  --deck-color-primary: #0b5fa5;
+}
+
+/* ---------- tech-code ---------- */
+
+.slidev-layout.tech-code {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  column-gap: 1.5rem;
+  padding: 2.25rem 2.5rem;
+}
+
+.tech-code__head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.tech-code__title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.tech-code__file {
+  font-family: var(--deck-font-mono);
+  font-size: 0.72rem;
+  color: var(--deck-color-muted);
+  margin-left: auto;
+}
+
+.tech-code__main {
+  min-width: 0;
+  overflow: auto;
+}
+
+.tech-code__main pre {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  max-height: 22rem;
+  overflow: auto;
+  border-radius: var(--deck-radius);
+  border: 1px solid var(--deck-color-line);
+}
+
+.tech-code__aside {
+  min-width: 0;
+  font-size: 0.88rem;
+  border-left: 1px dashed var(--deck-color-line);
+  padding-left: 1.25rem;
+}
+
+.slidev-layout.tech-code h3 {
+  margin-top: 0;
+}
+
+/* ---------- tech-arch ---------- */
+
+.slidev-layout.tech-arch {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  gap: 0.75rem;
+  padding: 2.25rem 3rem;
+}
+
+.tech-arch__figure {
+  min-height: 0;
+  border: 1px solid var(--deck-color-line);
+  border-radius: var(--deck-radius);
+  background: var(--deck-color-surface);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--deck-font-mono);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  overflow: auto;
+}
+
+.tech-arch__caption {
+  font-size: 0.75rem;
+  color: var(--deck-color-muted);
+}
+
+.tech-arch__caption::before {
+  content: '图 · ';
+}
+
+/* ---------- tech-compare ---------- */
+
+.slidev-layout.tech-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: auto 1fr;
+  column-gap: 1.5rem;
+  padding: 2.25rem 2.5rem;
+}
+
+.tech-compare__head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.tech-compare__col {
+  border: 1px solid var(--deck-color-line);
+  border-radius: var(--deck-radius);
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+}
+
+.tech-compare__col--left {
+  border-top: 3px solid var(--deck-color-accent);
+}
+
+.tech-compare__col--right {
+  border-top: 3px solid var(--deck-color-primary);
+}
+
+/* ---------- tech-benchmark ---------- */
+
+.slidev-layout.tech-benchmark {
+  padding: 2.25rem 3rem;
+}
+
+.tech-benchmark__unit {
+  font-size: 0.75rem;
+  color: var(--deck-color-muted);
+  margin-left: 0.5rem;
+}
+
+.slidev-layout.tech-benchmark td:first-child {
+  font-weight: 600;
+  color: var(--deck-color-primary);
+}
+
+.slidev-layout.tech-benchmark tbody tr:nth-child(even) {
+  background: var(--deck-color-surface);
+}
+
+/* ---------- tech-timeline ---------- */
+
+.slidev-layout.tech-timeline {
+  padding: 2.25rem 3rem;
+}
+
+.tech-timeline__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+  position: relative;
+}
+
+.tech-timeline__track::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0.45rem;
+  height: 2px;
+  background: var(--deck-color-line);
+}
+
+.tech-timeline__node {
+  position: relative;
+  padding-top: 1.5rem;
+}
+
+.tech-timeline__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 999px;
+  border: 2px solid var(--deck-color-primary);
+  background: var(--deck-color-bg);
+}
+
+.tech-timeline__node--done .tech-timeline__dot {
+  background: var(--deck-color-primary);
+}
+
+.tech-timeline__time {
+  font-family: var(--deck-font-mono);
+  font-size: 0.75rem;
+  color: var(--deck-color-muted);
+}
+
+.tech-timeline__title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
+.tech-timeline__desc {
+  font-size: 0.78rem;
+  color: var(--deck-color-muted);
+  margin-top: 0.2rem;
+  line-height: 1.5;
+}
+
+/* ---------- 组件 ---------- */
+
+.tech-badge {
+  display: inline-block;
+  padding: 0.05rem 0.45rem;
+  border-radius: 4px;
+  font-family: var(--deck-font-mono);
+  font-size: 0.72rem;
+  border: 1px solid var(--deck-color-line);
+  color: var(--deck-color-muted);
+}
+
+.tech-badge--ok {
+  color: #047857;
+  border-color: #a7f3d0;
+  background: #ecfdf5;
+}
+
+.tech-badge--warn {
+  color: #b45309;
+  border-color: #fde68a;
+  background: #fffbeb;
+}
+
+.tech-badge--bad {
+  color: #b91c1c;
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+.tech-code-note {
+  font-size: 0.8rem;
+  color: var(--deck-color-muted);
+  border-left: 2px solid var(--deck-color-line);
+  padding-left: 0.6rem;
+  margin: 0.5rem 0;
+}
+
+.tech-diff {
+  font-family: var(--deck-font-mono);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  border-radius: var(--deck-radius);
+  border: 1px solid var(--deck-color-line);
+  padding: 0.5rem 0.75rem;
+  background: var(--deck-color-surface);
+}
+
+.tech-diff__line--add {
+  color: #047857;
+}
+
+.tech-diff__line--del {
+  color: #b91c1c;
+  text-decoration: line-through;
+  opacity: 0.75;
+}
+
+.tech-kpi {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--deck-font-mono);
+}
+
+.tech-kpi__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--deck-color-primary);
+}
+
+.tech-kpi__unit {
+  font-size: 0.75rem;
+  color: var(--deck-color-muted);
+}
+
+.tech-kpi__label {
+  font-size: 0.78rem;
+  color: var(--deck-color-muted);
+  font-family: var(--deck-font-sans);
+}

@@ -1,0 +1,454 @@
+/*
+ * layout.css — 结构层样式
+ * 选择器一律以 .slidev-layout 或 .deck-* 为前缀，避免污染 Slidev UI。
+ * 覆盖官方 core 的排版（layouts-base.css 已先加载，这里负责「压上去」）。
+ */
+
+.slidev-layout {
+  font-family: var(--deck-font-sans);
+  color: var(--deck-color-fg);
+  background: var(--deck-color-bg);
+  line-height: 1.6;
+}
+
+/* 有页脚的内容页，给底部让位 */
+.slidev-layout.default,
+.slidev-layout.two-cols,
+.slidev-layout.two-cols-header,
+.slidev-layout.image-left,
+.slidev-layout.image-right,
+.slidev-layout.iframe-left,
+.slidev-layout.iframe-right,
+.slidev-layout.deck-table,
+.slidev-layout.deck-metrics,
+.slidev-layout.deck-agenda,
+.slidev-layout.tech-code,
+.slidev-layout.tech-arch,
+.slidev-layout.tech-compare,
+.slidev-layout.tech-benchmark,
+.slidev-layout.tech-timeline {
+  padding-bottom: calc(2.5rem + var(--deck-footer-height));
+}
+
+/* ---------- 通用排版 ---------- */
+
+.deck-rule {
+  width: 3rem;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--deck-color-primary), var(--deck-color-accent));
+  margin: 0.75rem 0 1.25rem;
+}
+
+.slidev-layout h1 {
+  font-size: 1.9rem;
+  line-height: 1.3;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.slidev-layout h2 {
+  font-size: 1.35rem;
+  line-height: 1.4;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.slidev-layout h2::before {
+  content: '';
+  display: inline-block;
+  width: 0.25rem;
+  height: 0.95em;
+  margin-right: 0.5rem;
+  vertical-align: -0.08em;
+  border-radius: 2px;
+  background: var(--deck-color-primary);
+}
+
+.slidev-layout h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--deck-color-primary);
+  margin-top: 1rem;
+}
+
+.slidev-layout p,
+.slidev-layout li {
+  color: var(--deck-color-fg);
+}
+
+.slidev-layout li {
+  line-height: 1.75;
+}
+
+.slidev-layout strong {
+  color: var(--deck-color-primary);
+}
+
+.slidev-layout table {
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.slidev-layout th {
+  font-weight: 600;
+  color: var(--deck-color-primary);
+  background: var(--deck-color-primary-soft);
+  border-bottom: 2px solid var(--deck-color-primary);
+}
+
+.slidev-layout tr {
+  border-bottom: 1px solid var(--deck-color-line);
+}
+
+.slidev-layout blockquote {
+  border-left: 3px solid var(--deck-color-primary);
+  background: var(--deck-color-surface);
+  color: var(--deck-color-fg);
+  border-radius: 0 var(--deck-radius) var(--deck-radius) 0;
+  padding: 0.35rem 0.75rem;
+}
+
+/* ---------- cover ---------- */
+
+.slidev-layout.deck-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 5rem;
+  position: relative;
+}
+
+.deck-cover__bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6px;
+  background: linear-gradient(180deg, var(--deck-color-primary), var(--deck-color-accent));
+}
+
+.deck-cover__eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--deck-color-muted);
+  margin-bottom: 1rem;
+}
+
+.slidev-layout.deck-cover h1 {
+  font-size: 2.6rem;
+  line-height: 1.25;
+  margin: 0 0 0.9rem;
+  max-width: 44rem;
+}
+
+.deck-cover__subtitle {
+  font-size: 1.2rem;
+  color: var(--deck-color-muted);
+  margin: 0;
+  max-width: 46rem;
+}
+
+.deck-cover__meta {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--deck-color-muted);
+}
+
+.deck-cover__logo {
+  position: absolute;
+  right: 3rem;
+  bottom: 2.25rem;
+}
+
+/* ---------- section ---------- */
+
+.slidev-layout.deck-section {
+  display: flex;
+  align-items: center;
+  padding: 3rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.deck-section__no {
+  position: absolute;
+  top: -2.5rem;
+  left: 3.25rem;
+  font-size: 11rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--deck-color-primary);
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.deck-section__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.deck-section__en {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--deck-color-muted);
+}
+
+.slidev-layout.deck-section h1 {
+  font-size: 2.5rem;
+  margin: 0.35rem 0 0;
+}
+
+.deck-cover__logo img,
+.deck-section__logo img {
+  max-height: 2.25rem;
+}
+
+/* ---------- agenda ---------- */
+
+.slidev-layout.deck-agenda {
+  padding: 2.75rem 4rem;
+}
+
+.deck-agenda__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.deck-agenda__item {
+  display: flex;
+  gap: 0.9rem;
+  align-items: baseline;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--deck-radius);
+  background: var(--deck-color-surface);
+}
+
+.deck-agenda__no {
+  font-family: var(--deck-font-mono);
+  font-size: 0.9rem;
+  color: var(--deck-color-primary);
+  opacity: 0.75;
+}
+
+.deck-agenda__title {
+  font-weight: 600;
+}
+
+.deck-agenda__desc {
+  font-size: 0.8rem;
+  color: var(--deck-color-muted);
+}
+
+/* ---------- table / metrics ---------- */
+
+.slidev-layout.deck-table {
+  padding: 2.75rem 3.5rem;
+}
+
+.deck-table__caption {
+  margin-top: 0.9rem;
+  font-size: 0.78rem;
+  color: var(--deck-color-muted);
+}
+
+.deck-table__caption::before {
+  content: '来源：';
+}
+
+.slidev-layout.deck-metrics {
+  padding: 2.75rem 3.5rem;
+}
+
+.deck-metrics__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.deck-metrics__card {
+  border: 1px solid var(--deck-color-line);
+  border-top: 3px solid var(--deck-color-primary);
+  border-radius: var(--deck-radius);
+  padding: 1rem 1.1rem;
+  background: var(--deck-color-surface);
+}
+
+.deck-metrics__value {
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--deck-color-primary);
+  font-family: var(--deck-font-mono);
+}
+
+.deck-metrics__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.deck-metrics__note {
+  font-size: 0.75rem;
+  color: var(--deck-color-muted);
+  margin-top: 0.25rem;
+}
+
+/* ---------- 中间态布局（intro / statement / fact / quote / end） ---------- */
+
+.slidev-layout.intro,
+.slidev-layout.statement,
+.slidev-layout.fact,
+.slidev-layout.quote {
+  display: grid;
+  height: 100%;
+  text-align: center;
+}
+
+.slidev-layout.intro > div,
+.slidev-layout.statement > div,
+.slidev-layout.fact > div,
+.slidev-layout.quote > div {
+  margin: auto;
+  max-width: 42rem;
+}
+
+.slidev-layout.statement h1,
+.slidev-layout.fact h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.slidev-layout.fact h1 {
+  font-size: 4rem;
+  color: var(--deck-color-primary);
+  font-family: var(--deck-font-mono);
+  margin-bottom: 0.5rem;
+}
+
+.slidev-layout.fact h1 + p {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.slidev-layout.quote h1 {
+  font-size: 1.6rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.slidev-layout.deck-end {
+  display: grid;
+  place-content: center;
+  text-align: center;
+  height: 100%;
+  padding: 3rem;
+}
+
+.deck-end__title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--deck-color-primary);
+}
+
+.deck-end__contact {
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  color: var(--deck-color-muted);
+  display: grid;
+  gap: 0.25rem;
+}
+
+/* ---------- 页脚 ---------- */
+
+.deck-footer {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: var(--deck-footer-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.75rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--deck-color-muted);
+  border-top: 1px solid var(--deck-color-line);
+  background: var(--deck-color-bg);
+  pointer-events: none;
+}
+
+.deck-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--deck-color-primary);
+}
+
+.deck-footer__brand img {
+  max-height: 1rem;
+}
+
+.deck-page-number {
+  font-family: var(--deck-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 小组件 ---------- */
+
+.deck-tag {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--deck-color-primary);
+  background: var(--deck-color-primary-soft);
+}
+
+.deck-tag--accent {
+  color: #fff;
+  background: var(--deck-color-accent);
+}
+
+.deck-tag--muted {
+  color: var(--deck-color-muted);
+  background: var(--deck-color-surface);
+}
+
+.deck-callout {
+  display: block;
+  border-left: 3px solid var(--deck-color-primary);
+  border-radius: 0 var(--deck-radius) var(--deck-radius) 0;
+  background: var(--deck-color-surface);
+  padding: 0.6rem 0.9rem;
+  margin: 0.75rem 0;
+  font-size: 0.92rem;
+}
+
+.deck-callout__title {
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.deck-callout--warn {
+  border-left-color: #d97706;
+}
+
+.deck-callout--danger {
+  border-left-color: #dc2626;
+}
+
+.deck-callout--success {
+  border-left-color: #059669;
+}

@@ -1,0 +1,8 @@
+/*
+ * deck 级（第 4 层）覆盖示例：只改变量，不加布局。
+ * 加载顺序：theme(base) → addons(tech) → deck，这里优先级最高。
+ */
+:root {
+  --deck-color-primary: #0f766e;
+  --deck-color-accent: #f59e0b;
+}
