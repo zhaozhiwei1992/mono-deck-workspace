@@ -30,6 +30,22 @@
   padding-bottom: calc(2.5rem + var(--deck-footer-height));
 }
 
+/* ---------- 外链图（```plantuml 等）自适应 ---------- */
+
+/*
+ * Slidev 的 PlantUml 组件只是 `<img src="${server}/svg/${code}">`，图多大就撑多大，
+ * 大图会溢出幻灯片。这里给定宽高上限，浏览器按比例缩到剩下的空间里。
+ * 注意：选择器靠默认 alt（PlantUML diagram），自定义 alt 后需自己加样式。
+ */
+.slidev-layout img[alt='PlantUML diagram'] {
+  display: block;
+  margin-inline: auto;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
 /* ---------- 通用排版 ---------- */
 
 .deck-rule {
@@ -143,7 +159,7 @@
 }
 
 .deck-cover__subtitle {
-  font-size: 2.2rem;
+  font-size: 1.2rem;
   color: var(--deck-color-muted);
   margin: 0;
   max-width: 46rem;

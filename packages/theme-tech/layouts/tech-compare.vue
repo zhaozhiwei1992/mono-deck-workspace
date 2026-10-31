@@ -1,17 +1,23 @@
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import { useDeckText } from 'slidev-theme-base/layoutHelper'
+
 const props = defineProps({
+  frontmatter: { type: Object as PropType<Record<string, unknown>>, default: () => ({}) },
   title: { type: String, default: '' },
   leftTitle: { type: String, default: '现状' },
   rightTitle: { type: String, default: '方案' },
   leftTag: { type: String, default: 'before' },
   rightTag: { type: String, default: 'after' },
 })
+
+const text = useDeckText(props)
 </script>
 
 <template>
   <div class="slidev-layout tech-compare">
     <div class="tech-compare__head">
-      <h3 class="tech-code__title">{{ props.title }}</h3>
+      <h3 class="tech-code__title">{{ text('title') }}</h3>
     </div>
     <div class="tech-compare__col tech-compare__col--left">
       <div class="tech-code__head">

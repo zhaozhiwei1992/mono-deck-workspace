@@ -23,6 +23,9 @@ importers:
       slidev-theme-base:
         specifier: workspace:*
         version: link:../../../packages/theme-base
+      slidev-theme-tech:
+        specifier: workspace:*
+        version: link:../../../packages/theme-tech
 
   decks/_template:
     dependencies:

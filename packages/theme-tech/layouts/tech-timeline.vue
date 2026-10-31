@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
+import { useDeckText } from 'slidev-theme-base/layoutHelper'
 
 interface Milestone {
   time: string
@@ -9,15 +10,18 @@ interface Milestone {
 }
 
 const props = defineProps({
+  frontmatter: { type: Object as PropType<Record<string, unknown>>, default: () => ({}) },
   title: { type: String, default: '' },
   items: { type: Array as PropType<Milestone[]>, default: () => [] },
 })
+
+const text = useDeckText(props)
 </script>
 
 <template>
   <div class="slidev-layout tech-timeline">
-    <h1 v-if="props.title">{{ props.title }}</h1>
-    <div v-if="props.title" class="deck-rule" />
+    <h1 v-if="text('title')">{{ text('title') }}</h1>
+    <div v-if="text('title')" class="deck-rule" />
     <div class="tech-timeline__track">
       <div
         v-for="(item, idx) in props.items"

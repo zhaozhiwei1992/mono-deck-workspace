@@ -10,6 +10,25 @@ export function resolveAssetUrl(url: string) {
   return url
 }
 
+export interface DeckFrontmatter {
+  [key: string]: unknown
+}
+
+/**
+ * 布局取文本的统一入口。
+ *
+ * Slidev 会把保留字段从布局 props 里剔除（`title` 每页都剔，`author` 等 headmatter 字段
+ * 在首页剔除，见 @slidev/client 的 `frontmatterToProps`），所以这类字段只能从 Slidev
+ * 透传的 `frontmatter` prop 上取；非保留字段仍然可以直接读 props。
+ */
+export function useDeckText<T extends object>(props: T & { frontmatter?: DeckFrontmatter }) {
+  return (key: string, fallback = ''): string => {
+    const frontmatter = props.frontmatter || {}
+    const value = frontmatter[key] ?? (props as unknown as DeckFrontmatter)[key]
+    return typeof value === 'string' && value ? value : fallback
+  }
+}
+
 export function handleBackground(background?: string, dim = false, backgroundSize = 'cover'): CSSProperties {
   const isColor = background && (background[0] === '#' || background.startsWith('rgb'))
 
