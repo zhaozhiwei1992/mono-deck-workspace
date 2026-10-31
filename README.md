@@ -1,8 +1,8 @@
 # mono-deck-workspace
 
-Slidev 多主题 / 多 deck 工作区（第一版）。
+用来做演示文档工作，技术人员可用来替代ppt。基于Slidev 进行多主题 / 多 deck 工作区设计。
 
-设计依据见 `PLAN-theme-architecture.md`；本文只写「怎么用」。
+注: 纯小白不要入坑，等以后优化再考虑。
 
 ## 结构
 
@@ -34,7 +34,7 @@ Slidev 内置  →  theme  →  addons[0]  →  addons[1]  →  deck 本地
 
 反例：`theme: slidev-theme-tech` + `addons: [slidev-theme-base]` 会让 base 反过来压掉 tech，不要这么写。
 
-## 新建一份 deck
+## 如何创建一份演示文档
 
 ```bash
 cp -r decks/_template decks/my-deck
