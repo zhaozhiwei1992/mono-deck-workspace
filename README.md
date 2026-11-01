@@ -8,12 +8,14 @@
 
 ```
 packages/
-  theme-base/    slidev-theme-base   结构层：版式 + 排版 + token（唯一 theme）
-  theme-tech/    slidev-theme-tech   场景层：tech-* 版式与组件（以 addons 叠加）
+  theme-base/           slidev-theme-base          结构层：版式 + 排版 + token（唯一 theme）
+  theme-tech/           slidev-theme-tech          场景层：tech-* 版式与组件（以 addons 叠加）
+  theme-brand-huaqing/  slidev-theme-brand-huaqing 品牌层：华青色系 huaqing + brand-* 版式 + 提取素材
 decks/
   _template/    新 deck 复制起点
   demo-base/    只用 theme-base 的验证 deck
   demo-tech/    base + tech 的验证 deck（含 deck 级变量覆盖）
+  demo-brand/   base + tech + brand 的验证 deck（公司模板风格）
   _private/     私有 deck 容器（独立 git 仓库，主仓忽略，见下文）
 ```
 
@@ -30,7 +32,7 @@ Slidev 内置  →  theme  →  addons[0]  →  addons[1]  →  deck 本地
 **后者覆盖前者**（布局按文件名、样式按 import 顺序）。所以：
 
 - 结构层必须是 `theme`
-- 场景层 / 品牌层必须是 `addons`（按数组顺序叠加）
+- 场景层 / 品牌层必须是 `addons`（按数组顺序叠加；tech 与 brand 互不覆盖，先后随意）
 - 单个 deck 的临时覆盖放 `decks/<name>/`
 
 反例：`theme: slidev-theme-tech` + `addons: [slidev-theme-base]` 会让 base 反过来压掉 tech，不要这么写。
@@ -98,13 +100,23 @@ git remote add origin git@github.com:<you>/deck-private.git   # 私有仓库
 git push -u origin main
 ```
 
+## 工具
+
+| 脚本 | 用途 | 依赖 |
+|---|---|---|
+| `tools/pptx-inspect.py` | 盘点任意 pptx：版式、形状几何（占版面 %）、填充、图片清单与「原图/CSS」初判 | `python-pptx` + `pillow`（venv） |
+| `tools/check-layouts.mjs` | 逐页体检 Slidev deck：溢出、标题行数、页脚、关键元素百分比；有溢出退出码 1 | `playwright-chromium`（临时装，见脚本注释） |
+
+接一份新 PPT 做品牌层的完整流程（判据、五步、验收、坑）见项目文档
+`02_通用设计/04_品牌层接入流程.org`。
+
 ## 常用脚本
 
 | 命令 | 作用 |
 |---|---|
-| `pnpm dev:base` / `pnpm dev:tech` | 主题自检（`packages/*/example.md`） |
-| `pnpm dev:demo-base` / `pnpm dev:demo-tech` | 验证 deck |
-| `pnpm build:base` / `pnpm build:tech` | 主题自检构建 |
+| `pnpm dev:base` / `pnpm dev:tech` / `pnpm dev:brand` | 主题自检（`packages/*/example.md`） |
+| `pnpm dev:demo-base` / `pnpm dev:demo-tech` / `pnpm dev:demo-brand` | 验证 deck |
+| `pnpm build:base` / `pnpm build:tech` / `pnpm build:brand` | 主题自检构建 |
 | `pnpm build:all` | 所有 deck 构建 |
 | `pnpm --filter <pkg> export` | 导出（需先装 `playwright-chromium`） |
 
@@ -139,6 +151,35 @@ git push -u origin main
 
 组件：`TechBadge` `TechCodeNote` `TechDiff` `TechKpi`（**带前缀**，避免与 base 同名）。
 
+### theme-brand-huaqing（品牌层）
+
+从公司 PPT 模板（`03-华青PPT模板-数字科技-2025-v1.0.pptx`）提取：品牌色系 `huaqing` + 品牌页版式 + 7 张位图。
+
+| 布局 | props |
+|---|---|
+| `brand-cover` | `title/subtitle/eyebrow/author/date/org/orgEn/company/site/background` |
+| `brand-section` | `number/en/title` |
+| `brand-agenda` | `title/items[{no,title,desc}]/panelTitle/panelEn` |
+| `brand-end` | `title/subtitle/address/site/orgEn/background` |
+| `brand-columns` | `title/items[{title,en,desc}]/columns` |
+| `brand-steps` | `title/steps[]` + 正文 |
+
+组件：`BrandChevrons`（底部箭头条）。
+
+用法（`palette: huaqing` 是品牌层的色系名）：
+
+```yaml
+---
+theme: slidev-theme-base
+addons: [slidev-theme-tech, slidev-theme-brand-huaqing]
+palette: huaqing
+layout: brand-cover
+---
+```
+
+为什么封面/尾页用位图、正文页用 CSS，以及颜色/字号/坐标的对照表见
+`packages/theme-brand-huaqing/README.md`；接新 PPT 的通用流程见项目文档 `02_通用设计/04_品牌层接入流程.org`。
+
 ## 改风格（不要新建主题包）
 
 ### 换色系：只在 frontmatter 里选值
@@ -148,7 +189,7 @@ git push -u origin main
 theme: slidev-theme-base
 addons: [slidev-theme-tech]
 colorSchema: auto        # auto（跟随系统/可切换）| light | dark
-palette: red             # 不写 = blue（默认）；可选 red / teal / graphite
+palette: red             # 不写 = blue（默认）；可选 red / teal / graphite / huaqing（需装品牌层）
 ---
 ```
 

@@ -1,0 +1,584 @@
+/*
+ * brand.css — 品牌层（华青数字科技模板）
+ *
+ * 只做两件事：
+ *   1. 定义品牌色系 `palette: huaqing`（品牌轴 4 个 token，亮/暗成对）；
+ *   2. 定义 brand-* 版式的样式，含从 PPT 提取的品牌私有色（蓝渐变 / 浅蓝面板 / 蓝色彩带）。
+ *
+ * 纪律（与 03_主题定制方案设计.org 一致）：
+ *   - 中性轴（bg / fg / muted / line / surface）不碰，仍由 theme-base 的亮/暗两套管；
+ *     所以 brand-agenda / brand-columns / brand-steps 的文字用 --deck-color-fg/muted，
+ *     而不是写死 #3d485d，换到暗色自动跟着走。
+ *   - 色系名 huaqing 不与 base 的 blue/red/teal/graphite 重名（品牌层自带色板）。
+ *   - 封面 / 章节 / 结束三页是「品牌固定页」：图与彩带都是位图，不随亮暗与色系变。
+ *
+ * 颜色来源：`tools/extract-brand-assets.py` 从 pptx 的 slide/layout/theme XML 读出的实测值，
+ * 不是目测。对照表见 02_通用设计/04_品牌主题-华青.org。
+ */
+
+/* ---------- 1. 品牌色系 ---------- */
+
+html[data-palette='huaqing'] {
+  --deck-color-primary: #025bd9;              /* 对白底 6.00 */
+  --deck-color-primary-soft: rgba(2, 91, 217, 0.08);
+  --deck-color-accent: #c68a2e;               /* 金，取自 logo 金色版；配深色前景 6.24 */
+  --deck-color-on-accent: #1b1204;
+}
+
+html[data-palette='huaqing'].dark {
+  --deck-color-primary: #7fb2ff;              /* 对 #0f1420 8.51 */
+  --deck-color-primary-soft: rgba(127, 178, 255, 0.14);
+  --deck-color-accent: #f0b860;               /* 10.28 */
+  --deck-color-on-accent: #1b1204;
+}
+
+/* ---------- 2. 品牌私有 token（只在 brand-* 版式内生效） ---------- */
+
+.slidev-layout.brand-cover,
+.slidev-layout.brand-section,
+.slidev-layout.brand-agenda,
+.slidev-layout.brand-end,
+.slidev-layout.brand-columns,
+.slidev-layout.brand-steps {
+  --brand-blue: #025bd9;                      /* PPT 正文蓝（标题/数字/描边） */
+  --brand-blue-deep: #0048f9;                 /* 渐变起点 */
+  --brand-blue-bright: #0487f6;               /* 渐变终点 */
+  --brand-panel: #e5ecf8;                     /* 浅蓝面板底（PPT 正文页卡片） */
+  --brand-gradient: linear-gradient(160deg, var(--brand-blue-deep) 0%, var(--brand-blue-bright) 100%);
+}
+
+/* 品牌封面/章节/结束页不挂页脚（base 的 hideOn 只认 deck-*，这里补 brand-*） */
+.slidev-page:has(.slidev-layout.brand-cover) .deck-footer,
+.slidev-page:has(.slidev-layout.brand-section) .deck-footer,
+.slidev-page:has(.slidev-layout.brand-end) .deck-footer {
+  display: none;
+}
+
+/* ---------- 3. brand-cover ---------- */
+
+.slidev-layout.brand-cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  padding: 0 3.6rem;
+  overflow: hidden;
+}
+
+.slidev-layout.brand-cover::before {
+  content: '';
+  position: absolute;
+  inset: auto -10% -35% auto;
+  width: 60%;
+  height: 70%;
+  background: radial-gradient(closest-side, rgba(56, 189, 248, 0.22), transparent 70%);
+  pointer-events: none;
+}
+
+.brand-cover__top {
+  position: absolute;
+  inset: 2.1rem 3.6rem auto 3.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand-cover__mark {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-cover__mark img {
+  display: block;
+  height: 1.9rem;
+  width: auto;
+}
+
+.brand-cover__org {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.brand-cover__logo {
+  display: block;
+  height: 1.55rem;
+  width: auto;
+}
+
+.brand-cover__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 2.8rem;
+}
+
+.brand-cover__brand {
+  flex: 0 0 16.5rem;
+  display: grid;
+  gap: 0.55rem;
+  padding-right: 2.2rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.brand-cover__emblem {
+  display: block;
+  width: 8.6rem;
+  height: auto;
+  margin-bottom: 0.15rem;
+}
+
+.brand-cover__en {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.5;
+}
+
+.brand-cover__cn {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.5;
+}
+
+.brand-cover__main {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 34rem;
+}
+
+.brand-cover__eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.75rem;
+}
+
+.slidev-layout.brand-cover h1 {
+  margin: 0;
+  font-size: 3.6rem;
+  line-height: 1.15;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+.brand-cover__subtitle {
+  margin: 0.9rem 0 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.76);
+  max-width: 30rem;
+}
+
+.brand-cover__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.6rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.brand-cover__foot {
+  position: absolute;
+  inset: auto auto 1.15rem 3.6rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ---------- 4. brand-section ---------- */
+
+.slidev-layout.brand-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background: #fbfbfd;
+  overflow: hidden;
+}
+
+/* 蓝色彩带：PPT 里是 12.145×2.133in 的位图，位置固定（left 0 / top 33.3% / 宽 91.1%） */
+.brand-section__band {
+  position: absolute;
+  left: 0;
+  top: 33.3%;
+  width: 91.1%;
+  height: 28.4%;
+  background-image: url('../assets/band-blue.png');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 100% 100%;
+}
+
+.brand-section__inner {
+  position: relative;
+  z-index: 1;
+  margin-left: 11.3%;
+  max-width: 62%;
+  color: #fff;
+}
+
+.brand-section__no {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.slidev-layout.brand-section h1 {
+  margin: 0.2rem 0 0;
+  font-size: 3.2rem;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #fff;
+}
+
+.brand-section__en {
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.brand-section__rule {
+  width: 2.2rem;
+  height: 2px;
+  margin-top: 0.9rem;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/* ---------- 5. brand-agenda ---------- */
+
+.slidev-layout.brand-agenda {
+  position: relative;
+  padding: 2.4rem 3.4rem calc(2.5rem + var(--deck-footer-height));
+  overflow: hidden;
+}
+
+.brand-agenda__panel {
+  position: absolute;
+  left: 0;
+  top: 25.3%;
+  width: 35.4%;
+  height: 47.4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  padding: 0 1.6rem 1.4rem;
+  color: #fff;
+  background:
+    radial-gradient(circle at 26% 30%, rgba(78, 178, 255, 0.55), transparent 58%),
+    linear-gradient(160deg, var(--brand-blue-deep) 0%, var(--brand-blue) 55%, #0040b4 100%);
+}
+
+.brand-agenda__panel-en {
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.brand-agenda__panel-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.slidev-layout.brand-agenda h1.brand-agenda__title {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--deck-color-fg);
+  margin: 0 0 1.9rem;
+}
+
+.brand-agenda__grid {
+  position: absolute;
+  z-index: 1;
+  left: 44.3%;
+  right: 3.4rem;
+  top: 34.4%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem 2.2rem;
+}
+
+.brand-agenda__item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+}
+
+.brand-agenda__no {
+  flex: 0 0 auto;
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--deck-color-primary);
+}
+
+.brand-agenda__text {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.slidev-layout.brand-agenda .brand-agenda__item-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--deck-color-fg);
+  line-height: 1.35;
+}
+
+.slidev-layout.brand-agenda .brand-agenda__item-desc {
+  font-size: 0.72rem;
+  color: var(--deck-color-muted);
+  line-height: 1.4;
+}
+
+/* ---------- 6. brand-end ---------- */
+
+.slidev-layout.brand-end {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  padding: 0 4rem;
+  overflow: hidden;
+}
+
+.brand-end__title {
+  font-size: 3.2rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+}
+
+.brand-end__en {
+  margin-top: 1rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.brand-end__contact {
+  margin-top: 1.6rem;
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.brand-end__emblem {
+  width: 6.4rem;
+  height: auto;
+  margin-bottom: 1.2rem;
+}
+
+.brand-end__subtitle {
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.brand-end__deco {
+  position: absolute;
+  left: 1.4rem;
+  bottom: 1.1rem;
+  width: 3.4rem;
+  height: auto;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.brand-end__ring {
+  position: absolute;
+  left: 3.6rem;
+  bottom: 1.1rem;
+  width: 2.2rem;
+  height: auto;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ---------- 7. brand-columns ---------- */
+
+.slidev-layout.brand-columns {
+  padding: 2.3rem 3rem calc(2.5rem + var(--deck-footer-height));
+}
+
+.slidev-layout.brand-columns h1.brand-columns__title {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--deck-color-fg);
+  margin: 0 0 0.4rem;
+}
+
+.brand-columns__rule {
+  width: 2.2rem;
+  height: 3px;
+  margin: 0 0 1.7rem;
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-blue-bright));
+}
+
+.brand-columns__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--brand-columns, 3), minmax(0, 1fr));
+  gap: 0 2.2rem;
+}
+
+.brand-columns__item {
+  position: relative;
+  padding-left: 1.35rem;
+}
+
+.brand-columns__item + .brand-columns__item::before {
+  content: '';
+  position: absolute;
+  left: -1.1rem;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  width: 1px;
+  background: var(--deck-color-line);
+}
+
+.brand-columns__item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.15rem;
+  bottom: 0.2rem;
+  width: 1px;
+  background: repeating-linear-gradient(
+    180deg,
+    var(--deck-color-line) 0 4px,
+    transparent 4px 8px
+  );
+}
+
+.brand-columns__dot {
+  position: absolute;
+  left: -0.2rem;
+  top: 0.42rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--brand-blue);
+}
+
+.slidev-layout.brand-columns h3.brand-columns__item-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--deck-color-fg);
+  line-height: 1.35;
+}
+
+.slidev-layout.brand-columns p.brand-columns__item-en {
+  margin: 0.2rem 0 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--deck-color-primary);
+}
+
+.slidev-layout.brand-columns p.brand-columns__item-desc {
+  margin: 0.6rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--deck-color-muted);
+}
+
+/* ---------- 8. brand-steps + BrandChevrons ---------- */
+
+.slidev-layout.brand-steps {
+  display: flex;
+  flex-direction: column;
+  padding: 2.3rem 3rem calc(1.9rem + var(--deck-footer-height));
+}
+
+.slidev-layout.brand-steps h1.brand-steps__title {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--deck-color-fg);
+  margin: 0 0 0.4rem;
+}
+
+.brand-steps__rule {
+  width: 2.2rem;
+  height: 3px;
+  margin: 0 0 1.4rem;
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-blue-bright));
+}
+
+.brand-steps__body {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.brand-chevrons {
+  display: flex;
+  margin-top: 1.2rem;
+}
+
+.brand-chevrons__item {
+  position: relative;
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.1rem;
+  margin-right: -0.55rem;
+  padding: 0 1.5rem;
+  color: #fff;
+  font-size: 0.8rem;
+  clip-path: polygon(0 0, calc(100% - 0.8rem) 0, 100% 50%, calc(100% - 0.8rem) 100%, 0 100%, 0.8rem 50%);
+}
+
+.brand-chevrons__item:first-child {
+  padding-left: 1.1rem;
+  clip-path: polygon(0 0, calc(100% - 0.8rem) 0, 100% 50%, calc(100% - 0.8rem) 100%, 0 100%);
+}
+
+.brand-chevrons__item:last-child {
+  margin-right: 0;
+}
+
+.brand-chevrons__no {
+  font-size: 0.72rem;
+  opacity: 0.75;
+}
+
+.brand-chevrons__title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.brand-chevrons__item:nth-child(1) { background: #0666ff; }
+.brand-chevrons__item:nth-child(2) { background: #015bda; }
+.brand-chevrons__item:nth-child(3) { background: #014ebb; }
+.brand-chevrons__item:nth-child(4) { background: #0a3f8f; }
+.brand-chevrons__item:nth-child(n + 5) { background: #0a3f8f; }
+
+/* ---------- 9. 暗色 ---------- */
+
+/*
+ * 只有「品牌固定页」例外：常见做法是保持原样（深蓝底 + 白字）。
+ * 但 brand-section 的浅色底在暗色下会刺眼，这里跟着中性轴走，彩带仍是品牌位图。
+ */
+html.dark .slidev-layout.brand-section {
+  background: var(--deck-color-bg);
+}

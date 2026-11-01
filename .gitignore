@@ -6,3 +6,4 @@ dist/
 
 # 私有 deck：独立 git 仓库，永不进本公开仓库
 decks/_private/
+packages/*/assets/_raw/

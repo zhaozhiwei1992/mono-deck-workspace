@@ -39,6 +39,18 @@ importers:
         specifier: workspace:*
         version: link:../../packages/theme-base
 
+  decks/demo-brand:
+    dependencies:
+      slidev-theme-base:
+        specifier: workspace:*
+        version: link:../../packages/theme-base
+      slidev-theme-brand-huaqing:
+        specifier: workspace:*
+        version: link:../../packages/theme-brand-huaqing
+      slidev-theme-tech:
+        specifier: workspace:*
+        version: link:../../packages/theme-tech
+
   decks/demo-tech:
     dependencies:
       slidev-theme-base:
@@ -49,6 +61,12 @@ importers:
         version: link:../../packages/theme-tech
 
   packages/theme-base: {}
+
+  packages/theme-brand-huaqing:
+    dependencies:
+      slidev-theme-base:
+        specifier: workspace:*
+        version: link:../theme-base
 
   packages/theme-tech:
     dependencies:

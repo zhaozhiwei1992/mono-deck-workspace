@@ -7,8 +7,11 @@
     "dev:tech": "pnpm --filter slidev-theme-tech dev",
     "dev:demo-base": "pnpm --filter deck-demo-base dev",
     "dev:demo-tech": "pnpm --filter deck-demo-tech dev",
+    "dev:demo-brand": "pnpm --filter deck-demo-brand dev",
+    "dev:brand": "pnpm --filter slidev-theme-brand-huaqing dev",
     "build:base": "pnpm --filter slidev-theme-base build",
     "build:tech": "pnpm --filter slidev-theme-tech build",
+    "build:brand": "pnpm --filter slidev-theme-brand-huaqing build",
     "dev:all": "pnpm -r --parallel --filter \"./decks/**\" run dev",
     "build:all": "pnpm -r --filter \"./decks/**\" run build",
     "export:all": "pnpm -r --filter \"./decks/**\" run export"

@@ -1,0 +1,29 @@
+{
+  "name": "slidev-theme-brand-huaqing",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "品牌层（addon）：华青数字科技模板的品牌色系 huaqing、封面/章节/目录/结束/多列/步骤版式与提取素材",
+  "keywords": [
+    "slidev-theme",
+    "slidev",
+    "brand"
+  ],
+  "files": [
+    "layouts",
+    "components",
+    "styles",
+    "assets"
+  ],
+  "engines": {
+    "slidev": ">=53.0.0"
+  },
+  "dependencies": {
+    "slidev-theme-base": "workspace:*"
+  },
+  "scripts": {
+    "dev": "slidev example.md",
+    "build": "slidev build example.md",
+    "export": "slidev export example.md"
+  }
+}
