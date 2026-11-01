@@ -12,6 +12,7 @@
     "layouts",
     "components",
     "styles",
+    "setup",
     "layoutHelper.ts",
     "slide-bottom.vue"
   ],
@@ -19,7 +20,7 @@
     "slidev": ">=53.0.0"
   },
   "slidev": {
-    "colorSchema": "light"
+    "colorSchema": "auto"
   },
   "scripts": {
     "dev": "slidev example.md",

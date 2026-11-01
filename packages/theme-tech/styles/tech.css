@@ -2,15 +2,10 @@
  * tech.css — 场景层差异样式
  * 只写「技术场景与结构层不同」的部分；基础排版、页脚、token 全部来自 slidev-theme-base。
  * 加载顺序：base(theme) → tech(addons)，因此这里可以直接覆盖 --deck-*。
+ *
+ * 纪律：本文件只能调中性轴（bg/fg/muted/line/surface），**不得写品牌轴**
+ * （primary/primary-soft/accent/on-accent），否则色系（palette）在这几个布局上失效。
  */
-
-.slidev-layout.tech-code,
-.slidev-layout.tech-arch,
-.slidev-layout.tech-compare,
-.slidev-layout.tech-benchmark,
-.slidev-layout.tech-timeline {
-  --deck-color-primary: #0b5fa5;
-}
 
 /* ---------- tech-code ---------- */
 

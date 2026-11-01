@@ -1,3 +1,4 @@
 import '@slidev/client/styles/layouts-base.css'
 import './tokens.css'
+import './palettes.css'
 import './layout.css'

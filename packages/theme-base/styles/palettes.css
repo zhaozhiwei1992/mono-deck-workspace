@@ -1,0 +1,62 @@
+/*
+ * palettes.css — 色系（品牌轴）
+ *
+ * 约定：
+ *   1. 只写品牌轴：primary / primary-soft / accent / on-accent。
+ *      bg / fg / muted / line / surface 属中性轴，归 light/dark（tokens.css），色板里禁止出现。
+ *   2. blue 是默认色系（tokens.css 已给），这里不重复定义；
+ *      写 palette: blue 与不写等价。
+ *   3. 每个色系必须成对给出亮色段与暗色段（`.dark`），缺一不合并。
+ *   4. 选中方式：headmatter 写 `palette: red`，由 setup/main.ts 落到 `html[data-palette]`。
+ *
+ * 验收基线（实测对比度）：亮色主色对白底 ≥ 4.5、暗色主色对 #0f1420 ≥ 4.5、
+ * on-accent 对 accent ≥ 4.5。改值前先算一遍，别只凭眼睛。
+ */
+
+/* ---------- red ---------- */
+
+html[data-palette='red'] {
+  --deck-color-primary: #9b1c1c;              /* 8.15 对白底 */
+  --deck-color-primary-soft: rgba(155, 28, 28, 0.08);
+  --deck-color-accent: #1f2937;               /* 主色已是红，点缀换深灰；白字 14.68 */
+  --deck-color-on-accent: #ffffff;
+}
+
+html[data-palette='red'].dark {
+  --deck-color-primary: #f87171;              /* 6.65 对 #0f1420 */
+  --deck-color-primary-soft: rgba(248, 113, 113, 0.14);
+  --deck-color-accent: #e5e7eb;
+  --deck-color-on-accent: #0f1420;
+}
+
+/* ---------- teal ---------- */
+
+html[data-palette='teal'] {
+  --deck-color-primary: #0f766e;              /* 5.47 对白底 */
+  --deck-color-primary-soft: rgba(15, 118, 110, 0.08);
+  --deck-color-accent: #b45309;               /* 白字 5.02 */
+  --deck-color-on-accent: #ffffff;
+}
+
+html[data-palette='teal'].dark {
+  --deck-color-primary: #5eead4;              /* 12.44 对 #0f1420 */
+  --deck-color-primary-soft: rgba(94, 234, 212, 0.14);
+  --deck-color-accent: #fbbf24;
+  --deck-color-on-accent: #0f1420;
+}
+
+/* ---------- graphite ---------- */
+
+html[data-palette='graphite'] {
+  --deck-color-primary: #374151;              /* 10.31 对白底，且与 muted #6b7280 有明度差 */
+  --deck-color-primary-soft: rgba(55, 65, 81, 0.08);
+  --deck-color-accent: #b91c1c;               /* 白字 6.47 */
+  --deck-color-on-accent: #ffffff;
+}
+
+html[data-palette='graphite'].dark {
+  --deck-color-primary: #cbd5e1;              /* 12.39 对 #0f1420 */
+  --deck-color-primary-soft: rgba(203, 213, 225, 0.14);
+  --deck-color-accent: #fca5a5;
+  --deck-color-on-accent: #0f1420;
+}

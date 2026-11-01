@@ -433,7 +433,7 @@
 }
 
 .deck-tag--accent {
-  color: #fff;
+  color: var(--deck-color-on-accent);
   background: var(--deck-color-accent);
 }
 

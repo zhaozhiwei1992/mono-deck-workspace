@@ -141,10 +141,27 @@ git push -u origin main
 
 ## 改风格（不要新建主题包）
 
-只改变量，三处按优先级从低到高：
+### 换色系：只在 frontmatter 里选值
 
-1. `packages/theme-base/styles/tokens.css` —— 默认值
-2. `packages/theme-tech/styles/tech.css` —— 场景差异
+```yaml
+---
+theme: slidev-theme-base
+addons: [slidev-theme-tech]
+colorSchema: auto        # auto（跟随系统/可切换）| light | dark
+palette: red             # 不写 = blue（默认）；可选 red / teal / graphite
+---
+```
+
+- `colorSchema` 是 Slidev 官方字段，只负责亮/暗；`palette` 是本项目字段，只负责品牌色，两者正交
+- `palette` 由 `packages/theme-base/setup/main.ts` 落到 `<html data-palette>`，样式按属性选择
+- 等价的纯官方写法（不想依赖主题里的 setup）：在 headmatter 写 `htmlAttrs: { 'data-palette': red }` 代替 `palette: red`
+
+### 单份 / 品牌覆盖（第 4 层）
+
+三处按优先级从低到高：
+
+1. `packages/theme-base/styles/tokens.css` —— 默认值（= blue 色系 + 中性轴）
+2. `packages/theme-base/styles/palettes.css` —— 色系
 3. `decks/<name>/styles/index.css` —— 单份 / 品牌覆盖
 
 ```css
@@ -153,25 +170,3 @@ git push -u origin main
   --deck-color-accent: #f59e0b;
 }
 ```
-
-`--deck-*` 为语义层，已映射到 `--slidev-theme-primary` 等官方变量。
-
-## 已知坑
-
-1. `theme`/`addons` 里**不能**写相对路径给 deck 用：相对的 addon 路径以「deck 目录的父目录」为基准解析。deck 里一律写包名。
-2. 包内自测（`packages/theme-tech/example.md`）的相对 addon 写作 `./theme-tech`（见文件内注释）。
-3. 组件同名会互相盖：场景层组件必须带前缀。
-4. 布局不建子目录（`layouts/**/*.vue` 按 basename 注册，子目录会被摊平）。
-5. 不要把字体写进 `slidev.defaults.fonts`（会走网络字体，内网/离线构建会卡）；用 css 变量。
-6. `engines.slidev` 是硬校验，升级 CLI 时同步改。
-
-## 验证清单
-
-```bash
-pnpm install
-pnpm build:base && pnpm build:tech          # 主题自检构建
-pnpm build:all                              # 所有 deck 构建
-pnpm dev:demo-tech                          # 人工看版式/页脚/配色
-```
-
-人工检查点：封面无页脚、正文页脚有页码、`tech-*` 页配色为 tech 色（青绿）、`footer: false` 页无页脚。
