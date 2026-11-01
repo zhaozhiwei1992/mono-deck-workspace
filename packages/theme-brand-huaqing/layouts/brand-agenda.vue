@@ -5,8 +5,10 @@ import { useDeckText } from 'slidev-theme-base/layoutHelper'
 type AgendaItem = string | { no?: string | number, title: string, desc?: string }
 
 /**
- * 品牌目录页（对齐 PPT 「目录」版式）：左侧 35.4% 宽的蓝色面板 + 右侧 2×2 大序号条目。
+ * 品牌目录页（对齐 PPT 「目录」版式）：左侧 35.4% 宽的蓝色面板 + 右侧 2 列大序号条目。
  * 面板用 CSS 渐变 + 径向高光重建（PPT 里是位图），因此条目数量可变、暗色下不刺眼。
+ *
+ * 页面标题（"目录"）写在**面板里**，不再占用页面上方——和 PPT 一致，上面那片留白不要。
  */
 const props = defineProps({
   frontmatter: { type: Object as PropType<Record<string, unknown>>, default: () => ({}) },
@@ -29,10 +31,9 @@ function normalize(item: AgendaItem, idx: number) {
   <div class="slidev-layout brand-agenda">
     <div class="brand-agenda__panel">
       <div class="brand-agenda__panel-en">{{ props.panelEn }}</div>
+      <h1 v-if="text('title')" class="brand-agenda__panel-cn">{{ text('title') }}</h1>
       <div v-if="text('panelTitle')" class="brand-agenda__panel-title">{{ text('panelTitle') }}</div>
     </div>
-
-    <h1 v-if="text('title')" class="brand-agenda__title">{{ text('title') }}</h1>
 
     <slot>
       <div class="brand-agenda__grid">

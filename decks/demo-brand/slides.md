@@ -15,6 +15,8 @@ org: 华青 · HUAQING
 orgEn: BEIJING TAIJI HUAQING
 company: 北京市太极华青信息系统有限公司
 site: 公司官网：www.tjhq.com　云构智慧政府
+year: true
+yearLabel: DIGITAL TECH
 ---
 
 ---

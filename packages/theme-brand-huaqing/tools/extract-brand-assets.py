@@ -14,9 +14,8 @@
 产出（assets/）：
     bg-cover.png        封面/尾页整幅底图（深蓝渐变 + 光效），16:9
     band-blue.png       章节页蓝色彩带（12.145×2.133in 原位图）
-    logo-mark.png       白色书法标识（左上角用小图）
-    logo-full.png       白色「华青 HUAQING」完整 logo（右上角）
-    logo-mark-gold.png  金色徽标（封面中部 / 尾页）
+    logo-huaqing.png        华青标识（白色版，深底用）
+    logo-huaqing-color.png  华青标识（彩色版，浅底/正文页标题行用）
     deco-ring.png       尾页左下圆环
     deco-ornament.png   尾页左下对称纹样
     _raw/               ppt/media 全量原图，便于回溯
@@ -170,9 +169,8 @@ def main() -> int:
     take('band-blue.png', bands[0] if bands else None)
 
     # logo：533×258（2.07:1）与 1175×482（2.44:1）
-    take('logo-mark.png', pick_logo(layout_pics + slide_pics, 533 / 258, want_dark=False))
-    take('logo-full.png', pick_logo(layout_pics + slide_pics, 1175 / 482, want_dark=False))
-    take('logo-mark-gold.png', pick_logo(layout_pics + slide_pics, 533 / 258, want_dark=True))
+    take('logo-huaqing.png', pick_logo(layout_pics + slide_pics, 1175 / 482, want_dark=False))
+    take('logo-huaqing-color.png', pick_logo(layout_pics + slide_pics, 1175 / 482, want_dark=True))
 
     # 尾页装饰：512×512 圆环、512×476 纹样
     squares = [p for p in slide_pics if near(p['px'][1], p['px'][0], 0.02)]
@@ -184,8 +182,8 @@ def main() -> int:
     for name, p in writes.items():
         src = f"slide {p['slide']}" if 'slide' in p else 'layout'
         report.append(f"| {name} | {src} / {p['name']} | {p['w']:.3f} × {p['h']:.3f} | {p['px'][0]}×{p['px'][1]} |")
-    missing = [n for n in ('bg-cover.png', 'band-blue.png', 'logo-mark.png', 'logo-full.png',
-                           'logo-mark-gold.png', 'deco-ring.png', 'deco-ornament.png') if n not in writes]
+    missing = [n for n in ('bg-cover.png', 'band-blue.png', 'logo-huaqing.png',
+                           'logo-huaqing-color.png', 'deco-ring.png', 'deco-ornament.png') if n not in writes]
     if missing:
         report += ['', f'> 未识别：{", ".join(missing)}（模板改版后请调阈值或手工另存）', '']
 
