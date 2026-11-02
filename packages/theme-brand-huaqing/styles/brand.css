@@ -163,6 +163,30 @@ html[data-palette='huaqing'].dark {
   opacity: 0.75;
 }
 
+/* 尾页通常只有一句致谢，文本块整体居中；封面仍是 PPT 原版左对齐，不受影响。
+ * 注意：只写 text-align:center 不够——__main 是 absolute + left:8% + width:64%，
+ * 块本身偏左，必须拆掉 left/width 才能真居中。 */
+.slidev-layout.brand-end .brand-simple__main {
+  left: 0;
+  right: 0;
+  top: 50%;
+  width: auto;
+  padding: 0 10%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+/* meta 是 flex、contact 是 grid，居中要各自指一下 */
+.slidev-layout.brand-end .brand-simple__meta {
+  justify-content: center;
+}
+
+.slidev-layout.brand-end .brand-simple__contact {
+  left: 50%;
+  transform: translateX(-50%);
+  justify-items: center;
+}
+
 /* ---------- 3.5 正文页标题行 logo ---------- */
 
 /*
